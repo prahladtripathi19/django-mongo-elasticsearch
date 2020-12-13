@@ -1,0 +1,71 @@
+Step to setup django with mongodb:
+
+step-1: Install following dependencies
+pip install django==3.1
+pip install djangorestframework
+pip install djongo
+pip install djangorestframework_simplejwt
+
+Step2: Run Following command to create basic django setup
+django-admin startproject catalog
+cd projectname
+python manage.py startapp product
+
+Step-3: Add below database changes
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'catalog',
+        'HOST': '127.0.0.1',
+        'PORT': 27017,
+    }
+}
+
+Step-3: Check jwt config in setting file and change according the requirement. I have changed token expir time 1 day.
+
+Step-4: Run below migration command and create super user
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+set username ,email and password
+
+Step-5:  python manage.py runserver
+localhost:8000 
+
+
+Step-6:  Setup Elastic search and kibana
+Install java8
+install elastic search
+install kibana (for some query and configuration validation)
+sudo -i service elasticsearch start
+sudo -i service elasticsearch stop
+sudo systemctl start kibana.service
+sudo systemctl stop kibana.service
+
+Step-7: Validate Elastic search
+curl -XGET http://localhost:9200
+ibana: localhost: 5601
+
+Step-8: Install following dependency for elasticsearch and djangoDRF
+
+pip install elasticsearch-dsl
+pip install django_elasticsearch_dsl
+
+Step-9: add following code to settings file
+  ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
+
+Run command to build index for existing data
+python manage.py search_index –rebuild
+
+Step-10: Please refere Api docs for Apis detail.
+
+
+
+
+
+
+
